@@ -19,7 +19,7 @@
 import { APIMethods } from "../constants";
 import { ForceCodedException } from "../exception";
 import { ClientConfig, UserInfoResponse } from "../models";
-import { URLUtils, AuthUtils } from "../utils";
+import { AuthUtils, URLUtils } from "../utils";
 
 export class ForceCodedCore {
 
@@ -37,10 +37,15 @@ export class ForceCodedCore {
         }
         
         //Get the hashed auth params
-        const authParams = AuthUtils.getAuthorizationParams(this._config.apiKey, this._config.secret, APIMethods.user.info, data);
+        const authParams = AuthUtils.getAuthorizationParams(
+            this._config.apiKey, 
+            this._config.secret, 
+            APIMethods.user.info, 
+            data
+        );
 
         //Construct the request data object
-        let requestData = {
+        const requestData = {
             ...authParams,
             ...data
         }
