@@ -1,0 +1,13 @@
+{
+    "command": {
+        "version": {
+            "message": "[ForceCoded Release] [GitHub Actions] [Release %s] Bump version"
+        }
+    },
+    "packages": [
+        "lib",
+        "samples/*"
+    ],
+    "npmClient": "yarn",
+    "version": "0.0.0"
+}
