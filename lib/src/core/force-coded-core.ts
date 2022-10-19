@@ -20,6 +20,7 @@ import { APIMethods } from "../constants";
 import { ForceCodedException } from "../exception";
 import { ClientConfig, UserInfoResponse } from "../models";
 import { AuthUtils, URLUtils } from "../utils";
+import { GeneralUtils } from "../utils/general-utils";
 
 export class ForceCodedCore {
 
@@ -35,12 +36,12 @@ export class ForceCodedCore {
         const data = {
             handles: handles.join(";")
         }
-        
+
         //Get the hashed auth params
         const authParams = AuthUtils.getAuthorizationParams(
-            this._config.apiKey, 
-            this._config.secret, 
-            APIMethods.user.info, 
+            this._config.apiKey,
+            this._config.secret,
+            APIMethods.user.info,
             data
         );
 
@@ -50,19 +51,25 @@ export class ForceCodedCore {
             ...data
         }
 
-        const userInfoResponse = await fetch(URLUtils.generateURL(APIMethods.user.info), {
-            body: new URLSearchParams(requestData).toString(),
-            method: "GET"
-        });
+        const userInfoResponse = await fetch(
+            URLUtils.generateURL(
+                APIMethods.user.info + "?" + new URLSearchParams(requestData).toString()
+            ),
+            {
+                headers: GeneralUtils.getHeaders(),
+                method: "GET"
+            }
+        );
 
         if (userInfoResponse.status !== 200) {
-            const apiError = userInfoResponse.json().toString();
+            const apiError = JSON.stringify(userInfoResponse.json());
             return Promise.reject(new ForceCodedException(
                 "FC_CORE-GUI-NF",
                 "force-coded-core",
                 "getUserInfo",
+                "",
                 "Failed to get a response from user info Endpoint",
-                apiError
+                apiError || "test"
             ));
         }
 
