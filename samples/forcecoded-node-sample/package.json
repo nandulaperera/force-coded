@@ -1,21 +1,21 @@
 {
-  "name": "textme-js-sdk-sample",
-  "description": "A sample app to demonstrate the usage of textme-js-sdk",
-  "version": "0.0.1",
+  "name": "forcecoded-node-sample",
+  "version": "1.0.0",
+  "description": "A sample app to demonstrate the usage of force-coded SDK",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "nodemon index.js"
   },
   "keywords": [],
-  "author": "Iconicto",
+  "author": "Nandula Perera",
   "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^2.0.15"
-  },
   "dependencies": {
-    "@iconicto/textme-js-sdk": "file:../../lib",
     "cookie-parser": "^1.4.6",
-    "express": "^4.17.1"
+    "express": "^4.18.2",
+    "force-coded": "file:../../lib"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }

@@ -31,17 +31,25 @@ export class AuthUtils {
 
         //Create API Signature
 
-        const params = {
+        const tempParams = {
             ...data,
             apiKey: apiKey,
             time: time
         }
+        
+        //Sort the keys alphabetically 
+        const params = Object.keys(tempParams).sort()
+            .reduce((accumulator, key) => {
+                accumulator[key] = tempParams[key];
+
+                return accumulator;
+            }, {});
 
         //Encode the JSON params to a string
         const encodedParams = new URLSearchParams(params).toString();
 
         const rawApiSig = `${rand}/${method}?${encodedParams}#${secret}`;
-        const apiSig = sha512(rawApiSig);
+        const apiSig = sha512.hex(rawApiSig);
 
         return {
             "apiKey": apiKey,

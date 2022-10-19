@@ -18,7 +18,7 @@
 
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const { TextMeClient } = require("@iconicto/textme-js-sdk");
+const { ForceCodedClient } = require("force-coded");
 const config = require("./config");
 
 //Constants
@@ -30,54 +30,14 @@ app.use(cookieParser());
 app.use(express.json());
 
 //Initialize the TextMe Client
-const textmeClient = new TextMeClient(config);
+const fc = new ForceCodedClient(config);
 
 app.get("/", (req, res) => {
-  res.status(200).send("Thank you for choosing TextMe.lk");
+  res.status(200).send("It works!");
 });
 
-/* Read the `to` and `message` properties in the body and pass them to the client
-    Eg: 
-        {
-            "to": "94771111111",
-            "message": "Hello from TextMe SDK"
-        }
-*/
-app.post("/send", (req, res) => {
-  textmeClient
-    .sendSMS(req.body.to, req.body.message)
-    .then((response) => {
-      console.log(response);
-      res.status(200).send(response);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send(err);
-    });
-});
-
-/*
-Read the SMS UID from the query paramers and pass into the client
-Eg URL: http://localhost:5000/view?uid=61bd23rt4b8237e 
-*/
-
-app.get("/view", (req, res) => {
-  textmeClient
-    .viewSMS(req.query.uid)
-    .then((response) => {
-      console.log(response);
-      res.status(200).send(response);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send(err);
-    });
-});
-
-//Get a list of all the SMS
-app.get("/viewall", (req, res) => {
-  textmeClient
-    .viewAllSMS()
+app.get("/profile", (req, res) => {
+  fc.getUserInfo(["suvink"])
     .then((response) => {
       console.log(response);
       res.status(200).send(response);

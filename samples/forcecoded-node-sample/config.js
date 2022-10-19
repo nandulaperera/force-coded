@@ -17,7 +17,7 @@
  */
 
 const config = {
-    apiKey: "4|rg6coE8RIS6lQeQf6IbvAna52f4gZqELZ3Bvl1Tp" ,
-    senderID: "Iconicto"
+    apiKey: process.env.CF_API_KEY ,
+    secret: process.env.CF_API_SECRET
 }
 module.exports = config;
