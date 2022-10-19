@@ -37,23 +37,9 @@ export class ForceCodedCore {
             handles: handles.join(";")
         }
 
-        //Get the hashed auth params
-        const authParams = AuthUtils.getAuthorizationParams(
-            this._config.apiKey,
-            this._config.secret,
-            APIMethods.user.info,
-            data
-        );
-
-        //Construct the request data object
-        const requestData = {
-            ...authParams,
-            ...data
-        }
-
         const userInfoResponse = await fetch(
             URLUtils.generateURL(
-                APIMethods.user.info + "?" + new URLSearchParams(requestData).toString()
+                APIMethods.user.info + "?" + new URLSearchParams(data).toString()
             ),
             {
                 headers: GeneralUtils.getHeaders(),
