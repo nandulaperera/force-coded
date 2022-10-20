@@ -25,5 +25,12 @@ export class GeneralUtils {
         return Math.floor(100000 + Math.random() * 900000);
     }
 
+    public static getHeaders(): HeadersInit {
+        return {
+            "Accept": "application/json",
+            "access-control-allow-origin":"*"
+        }
+    }
+
 
 }

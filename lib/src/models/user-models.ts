@@ -17,6 +17,12 @@
  */
 
 export interface UserInfoResponse {
+    status: string,
+    message: string,
+    result: userObject
+}
+
+export interface userObject {
     handle: string,
     email?: string,
     vkId?: string,
