@@ -19,7 +19,7 @@
 export interface UserInfoResponse {
     status: string,
     message: string,
-    result: userObject
+    result: userObject[]
 }
 
 export interface userObject {
